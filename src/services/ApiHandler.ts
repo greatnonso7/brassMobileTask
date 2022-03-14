@@ -11,10 +11,6 @@ import axios, {AxiosPromise} from 'axios';
 import {ENV, getAllModels, checkInternetInfo} from '../utils';
 import UserService from './UserService';
 
-var username = 'bridging-space';
-var password = 'space-secret';
-var DefaultAuthorization = 'Basic ' + Base64.btoa(`${username}:${password}`);
-
 
 async function handleRequest(req:any) {
   const {url, data} = req;
@@ -27,11 +23,7 @@ async function handleRequest(req:any) {
   req.headers.language = 'en';
   req.headers.timestamp = new Date().getTime();
   req.timeout = 60000;
-  const isAuthRoute = uri.includes('/auth');
-  const isProfile = uri.includes('/profile');
-
-  req.headers.Authorization =
-    isProfile || !isAuthRoute ? `Bearer ${token}` : DefaultAuthorization;
+  req.headers.Authorization = `Bearer ${token}`;
 
   console.log({req});
 
@@ -120,15 +112,15 @@ async function processApiRequest(
   return state.isConnected
     ? from(apiCaller)
         .pipe(
-          retryWhen(errors =>
+          retryWhen((errors: { pipe: (arg0: any, arg1: any, arg2: any) => any; }) =>
             errors.pipe(
-              mergeMap(err => errorHandler(err)),
+              mergeMap((err: any) => errorHandler(err)),
               delay(1000),
               take(2),
             ),
           ),
-          catchError(err => errorHandler(err.response)),
-          map(res => res.data),
+          catchError((err: { response: any; }) => errorHandler(err.response)),
+          map((res: { data: any; }) => res.data),
         )
         .toPromise()
     : Promise.reject({
