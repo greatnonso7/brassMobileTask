@@ -61,6 +61,7 @@ const HeaderBar = ({
       return (
         <TouchableOpacity
           activeOpacity={0.5}
+          style={styles.leftIconContainer}
           onPress={onPressLeftIcon}>
           <Back width={(40)} height={(40)} color={tintColor} />
         </TouchableOpacity>

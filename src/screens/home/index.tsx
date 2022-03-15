@@ -7,7 +7,7 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import colors from '../../styles/color';
 import LongButton from '../../shared/button';
 
-const Home = () => {
+const Home = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar headerTitle='Wallet' />
@@ -27,20 +27,27 @@ const Home = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-
         <LongButton
+          onPress={() => navigation.navigate('SendMoney')}
           isNotBottom
           buttonStyle={styles.buttonStyle}
           title="Send Money"
           titleStyle={styles.titleStyle}
         />
 
-
         <LongButton
           isNotBottom
           buttonStyle={styles.buttonStyle2}
           title="Receive Money"
         />
+      </View>
+
+      <View style={styles.recentTransactionsContainer}>
+        <Text style={styles.recentTransactionsHeaderText}>Recent Transactions</Text>
+
+        <TouchableOpacity activeOpacity={0.6} onPress={() => navigation.navigate('Transactions')}>
+          <Text style={styles.viewTransactionsText}>View All</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )

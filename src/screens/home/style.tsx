@@ -57,5 +57,21 @@ export const styles = StyleSheet.create({
   },
   titleStyle: {
     color: colors.primary,
+  },
+  recentTransactionsContainer: {
+    marginTop: hp(40),
+    marginHorizontal: wp(20),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  recentTransactionsHeaderText: {
+    fontFamily: 'Recoleta-SemiBold',
+    fontSize: hp(15),
+  },
+  viewTransactionsText: {
+    color: colors.primary,
+    fontFamily: 'Recoleta-Regular',
+    fontSize: hp(14),
   }
 })
