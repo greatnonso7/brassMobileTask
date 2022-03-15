@@ -1,11 +1,9 @@
 import React from "react";
 import { TouchableOpacity, View, ViewStyle, Text, TextStyle, Image, ImageProps } from 'react-native';
-import { Back } from 'assets/svgs';
-import colors from 'styles/color';
+import { Back } from '../../assets/svgs';
+import colors from '../../styles/color';
 import { deviceWidth, hp, wp } from '../responsive-dimension';
-
 import { styles } from './style';
-import { sharedImages } from "images";
 
 interface HeaderBarProps {
   hasBackButton?: boolean;
@@ -29,21 +27,14 @@ interface HeaderBarProps {
 
 const HeaderBar = ({
   hasBackButton,
-  rightIcon,
   leftIconStyle,
   onPressLeftIcon,
   onPressRightIcon,
   backgroundColor,
   headerRight,
   tintColor,
-  rightStep,
-  count,
-  hasFilter,
-  hasBenefits,
-  headerAddCard,
   headerTitle,
   leftIcon,
-  filterState,
   hasRightIcon
 }: HeaderBarProps) => {
 
@@ -70,7 +61,6 @@ const HeaderBar = ({
       return (
         <TouchableOpacity
           activeOpacity={0.5}
-          style={[styles.headerLeftIconContainer, leftIconStyle, { borderColor: tintColor }]}
           onPress={onPressLeftIcon}>
           <Back width={(40)} height={(40)} color={tintColor} />
         </TouchableOpacity>
@@ -79,57 +69,6 @@ const HeaderBar = ({
   }
 
   const renderHeaderRight = () => {
-    if (rightStep) {
-      return (
-        <View style={styles.rightStepContainer}>
-          <Text style={styles.rightStepText}>
-            Step {count} of 4
-          </Text>
-        </View>
-      );
-    }
-
-    if (hasFilter) {
-      return (
-        <TouchableOpacity
-          onPress={onPressRightIcon}
-          activeOpacity={0.5}
-          style={styles.filterIconContainer}>
-          <Image
-            source={filterState ? sharedImages['active-filter'] : sharedImages.filter}
-            resizeMode="contain"
-            style={[styles.filterIcon, filterState && { width: wp(25), height: hp(25) }]}
-          />
-        </TouchableOpacity>
-      )
-    }
-
-    if (headerAddCard) {
-      return (
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={onPressRightIcon}
-          style={styles.addCardContainer}>
-          <Image
-            source={sharedImages.scan}
-            resizeMode="contain"
-            style={styles.scanIcon}
-          />
-        </TouchableOpacity>
-      )
-    }
-
-    if (hasBenefits) {
-      return (
-        <TouchableOpacity
-          onPress={onPressRightIcon}
-          style={styles.hasBenefitsContainer}>
-          <Text style={styles.hasBenefitsText}>Benefits 😎</Text>
-        </TouchableOpacity>
-      )
-    }
-
-
     if (hasRightIcon) {
       return (
         <TouchableOpacity
@@ -162,24 +101,16 @@ const HeaderBar = ({
   const renderHeaderTitle = () => {
     if (headerTitle) {
       return (
-        <View style={{
-          // borderWidth: 1,
-          position: 'absolute',
-          left: deviceWidth * 0.35,
-          borderColor: colors.white,
-          alignSelf: 'center'
-        }}>
-          <Text style={[styles.headerTitle, { color: tintColor }]}>
-            {headerTitle}
-          </Text>
-        </View>
+        <Text style={[styles.headerTitle, { color: tintColor }]}>
+          {headerTitle}
+        </Text>
       );
     }
   };
 
   return (
-    <View style={[styles.headerContainer, { backgroundColor: backgroundColor || colors.appBlack }]}>
-      <View style={[styles.navBar, { backgroundColor: backgroundColor || colors.appBlack }]}>
+    <View style={[styles.headerContainer, { backgroundColor: backgroundColor || colors.white }]}>
+      <View style={[styles.navBar, { backgroundColor: backgroundColor || colors.white }]}>
         {renderHeaderLeft()}
         {renderHeaderTitle()}
         {renderHeaderRight()}

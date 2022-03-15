@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
-import colors from 'styles/color';
-import { deviceWidth, hp, wp } from '../responsive-dimension';
-import { Fonts } from 'assets/fonts';
+import colors from '../../styles/color';
+import { deviceWidth, hp, paddingTopiOS, wp } from '../responsive-dimension';
+// import { Fonts } from 'assets/fonts';
 
 export const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: colors.appBlack,
     width: deviceWidth,
+    paddingTop: paddingTopiOS
   },
   navBar: {
     width: deviceWidth,
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
     height: hp(44),
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingHorizontal: hp(20),
   },
   headerLeftIconContainer: {
@@ -37,21 +38,7 @@ export const styles = StyleSheet.create({
     height: 28,
     width: 28,
   },
-  hasBenefitsContainer: {
-    height: hp(35),
-    width: wp(85),
-    position: 'absolute',
-    right: wp(26),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: hp(10),
-    backgroundColor: colors.appBlack,
-  },
-  hasBenefitsText: {
-    fontFamily: Fonts.circularStdMedium,
-    color: colors.white,
-  },
+
   addCardContainer: {
     height: hp(51),
     width: wp(51),
@@ -89,7 +76,7 @@ export const styles = StyleSheet.create({
   },
   rightStepText: {
     color: colors.white,
-    fontFamily: Fonts.circularStdMedium,
+    // fontFamily: Fonts.circularStdMedium,
     fontSize: hp(14),
   },
   filterIconContainer: {
@@ -113,8 +100,9 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: hp(20),
-    fontFamily: Fonts.circularStdMedium,
-    textAlign: 'center',
+    fontWeight: 'bold',
+    // fontFamily: Fonts.circularStdMedium,
+    // textAlign: 'center',
   },
   leftIcon: {
     height: hp(20),
