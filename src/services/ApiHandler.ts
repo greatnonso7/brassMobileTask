@@ -9,7 +9,6 @@ import {
 } from 'rxjs/operators';
 import axios, {AxiosPromise} from 'axios';
 import {ENV, getAllModels, checkInternetInfo} from '../utils';
-import UserService from './UserService';
 
 
 async function handleRequest(req:any) {
@@ -18,7 +17,7 @@ async function handleRequest(req:any) {
   let uri = url.replace(ENV.baseUrl, '');
 
   const models = getAllModels();
-  let { token } = models.User;
+  let { token } = models.FinTechServices;
   req.headers.Accept = 'application/json';
   req.headers.language = 'en';
   req.headers.timestamp = new Date().getTime();
@@ -30,13 +29,6 @@ async function handleRequest(req:any) {
   return req;
 }
 
-async function getUserToken() {
-  const userToken = await UserService?.getAuthAccessToken();
-
-  return userToken;
-}
-
-getUserToken();
 
 
 async function handleResponse(res: any) {
@@ -47,14 +39,6 @@ async function handleResponse(res: any) {
   return res;
 }
 
-/**
- * This is used to generate a new token for api calls
- * @returns {Promise<void>}
- */
-async function refresh() {
-  console.log('I was here to refreshToke');
-  await UserService.refreshToken({ success: () => null, error: () => null });
-}
 
 /**
  * This is used to manage errors from api calls by checking needed information
@@ -63,15 +47,13 @@ async function refresh() {
  * @returns {Observable<never>}
  */
 function errorHandler(err: any): Observable<any> {
-  const message = i18n.messages.errorEncountered;
+  const message = 'Error was encountered';
   if (err && err?.status === 0) {
     Object.assign(err.data, {message});
   }
 
   console.log('Error=', err);
-  if (err.status === 401) {
-    refresh();
-  }
+
   return throwError(err);
 }
 
@@ -107,7 +89,6 @@ async function processApiRequest(
   const message =
     'No network access. please check your connectivity or restart your WIFI.';
   const state = await checkInternetInfo(true);
-
 
   return state.isConnected
     ? from(apiCaller)

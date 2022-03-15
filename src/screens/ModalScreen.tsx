@@ -1,19 +1,22 @@
 import { TouchableOpacity, StyleSheet, View, Text, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Banks } from '../constants/Banks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import HeaderBar from '../shared/header-bar';
 import { hp, wp } from '../shared/responsive-dimension';
 import colors from '../styles/color';
 
 export default function ModalScreen({ navigation, route }: any) {
 
-  const goBack = async (item: { name: string; code: string }) => {
+  const banks = useSelector((state: RootState) => state.FinTechServices.banks);
+
+  const goBack = async (name: string, code: string) => {
     const { params } = route;
 
     if (params)
       params.handler({
-        bankName: item.name,
-        bankCode: item.code
+        bankName: name,
+        bankCode: code
       });
     navigation.goBack();
   };
@@ -25,17 +28,19 @@ export default function ModalScreen({ navigation, route }: any) {
       <View style={styles.bodyContainer}>
         <FlatList
           scrollEnabled
-          data={Banks}
-          renderItem={({ item }) => {
+          data={banks.sort((a: any, b: any) => a.name.localeCompare(b.name))}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: hp(30) }}
+          renderItem={({ item: { name, code } }) => {
             return (
               <TouchableOpacity
-                onPress={() => goBack(item)}
+                onPress={() => goBack(name, code)}
                 style={styles.itemContainer}>
-                <Text style={styles.itemName}>{item.name}</Text>
+                <Text style={styles.itemName}>{name}</Text>
               </TouchableOpacity>
             )
           }}
-          keyExtractor={(item) => item.name.toString()}
+          keyExtractor={(name) => name}
         />
       </View>
     </SafeAreaView>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderBar from '../../shared/header-bar';
@@ -6,8 +6,18 @@ import { styles } from './style';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import colors from '../../styles/color';
 import LongButton from '../../shared/button';
+import { useToast } from 'react-native-toast-notifications';
+import { useDispatch } from 'react-redux';
 
 const Home = ({ navigation }: any) => {
+  const toast = useToast();
+
+  const { FinTechServices: { fetchBanks } } = useDispatch();
+
+  useEffect(() => {
+    fetchBanks();
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar headerTitle='Wallet' />
@@ -36,6 +46,7 @@ const Home = ({ navigation }: any) => {
         />
 
         <LongButton
+          onPress={() => toast.show('Hello world', { type: 'danger', duration: 3000 })}
           isNotBottom
           buttonStyle={styles.buttonStyle2}
           title="Receive Money"
