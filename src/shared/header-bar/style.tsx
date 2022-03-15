@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../styles/color';
 import { deviceWidth, hp, paddingTopiOS, wp } from '../responsive-dimension';
-// import { Fonts } from 'assets/fonts';
 
 export const styles = StyleSheet.create({
   headerContainer: {
@@ -101,8 +100,7 @@ export const styles = StyleSheet.create({
   headerTitle: {
     fontSize: hp(20),
     fontWeight: 'bold',
-    // fontFamily: Fonts.circularStdMedium,
-    // textAlign: 'center',
+    fontFamily: 'Recoleta-Bold'
   },
   leftIcon: {
     height: hp(20),

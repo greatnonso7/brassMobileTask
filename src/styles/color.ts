@@ -9,6 +9,8 @@ const colors = {
   green: '#45D988',
   dark: '#012224',
   lightGrey: '#838F91',
+  disabled: '#6288F8',
+
 };
 
 export default colors;

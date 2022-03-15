@@ -5,6 +5,7 @@ import HeaderBar from '../../shared/header-bar';
 import { styles } from './style';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import colors from '../../styles/color';
+import LongButton from '../../shared/button';
 
 const Home = () => {
   return (
@@ -23,6 +24,23 @@ const Home = () => {
         <View>
           <Ionicons name="md-wallet-outline" size={40} style={styles.walletIcon} />
         </View>
+      </View>
+
+      <View style={styles.buttonContainer}>
+
+        <LongButton
+          isNotBottom
+          buttonStyle={styles.buttonStyle}
+          title="Send Money"
+          titleStyle={styles.titleStyle}
+        />
+
+
+        <LongButton
+          isNotBottom
+          buttonStyle={styles.buttonStyle2}
+          title="Receive Money"
+        />
       </View>
     </SafeAreaView>
   )

@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     width: wp(343),
     height: hp(98),
     marginTop: hp(20),
-    backgroundColor: '#838F910D',
+    backgroundColor: '#E6F5F6',
     borderRadius: hp(8),
     alignSelf: 'center',
     paddingHorizontal: wp(22),
@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
   },
   walletText: {
     color: colors.lightGrey,
-    fontSize: hp(13),
+    fontSize: hp(14),
+    fontFamily: 'Recoleta-Regular',
   },
   hideBalanceContainer: {
     marginLeft: wp(10),
@@ -35,9 +36,26 @@ export const styles = StyleSheet.create({
     fontSize: hp(22),
     fontWeight: 'bold',
     color: colors.dark,
+    fontFamily: 'Recoleta-SemiBold',
   },
   walletIcon: {
     marginTop: hp(10),
+    color: colors.primary,
+  },
+  buttonContainer: {
+    marginTop: hp(40),
+    marginHorizontal: wp(20),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  buttonStyle: {
+    width: wp(155),
+    backgroundColor: '#E6F5F6',
+  },
+  buttonStyle2: {
+    width: wp(155),
+  },
+  titleStyle: {
     color: colors.primary,
   }
 })

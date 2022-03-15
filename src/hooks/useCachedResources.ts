@@ -16,6 +16,11 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...FontAwesome.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          'Recoleta-Black': require('../assets/fonts/Recoleta-Black.ttf'),
+          'Recoleta-Bold': require('../assets/fonts/Recoleta-Bold.ttf'),
+          'Recoleta-Light': require('../assets/fonts/Recoleta-Light.ttf'),
+          'Recoleta-SemiBold': require('../assets/fonts/Recoleta-SemiBold.ttf'),
+          'Recoleta-Regular': require('../assets/fonts/Recoleta-Regular.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
