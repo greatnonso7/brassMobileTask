@@ -24,7 +24,17 @@ export const FinTechServices = {
 			} catch (error) {
 				this.handleError(error);
 			}
-		},
+    },
+    
+    async makeTransfer(data, state) {
+      dispatch.FinTechServices.setError(false);
+
+      try {
+        const api = await ApiServices.sendMoney(data);
+      } catch (error) {
+        this.handleError(error)  
+      }
+    },
 		
 		async handleError(error: any) {
       dispatch.FinTechServices.setError(true);
