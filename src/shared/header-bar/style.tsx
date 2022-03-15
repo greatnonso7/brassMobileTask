@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: colors.appBlack,
     width: deviceWidth,
-    paddingTop: paddingTopiOS
   },
   navBar: {
     width: deviceWidth,

@@ -1,8 +1,8 @@
 import React from "react";
 import { TouchableOpacity, View, ViewStyle, Text, TextStyle, Image, ImageProps } from 'react-native';
-import { Back } from '../../assets/svgs';
+import { Back, Close } from '../../assets/svgs';
 import colors from '../../styles/color';
-import { deviceWidth, hp, wp } from '../responsive-dimension';
+import { deviceWidth, hp, paddingTopiOS, wp } from '../responsive-dimension';
 import { styles } from './style';
 
 interface HeaderBarProps {
@@ -14,15 +14,11 @@ interface HeaderBarProps {
   backgroundColor?: string;
   headerRight?: string;
   tintColor?: string;
-  rightStep?: boolean;
-  count?: number;
-  hasFilter?: boolean;
-  rightIcon?: boolean;
   headerAddCard?: boolean;
   hasBenefits?: boolean;
   headerTitle?: string;
-  hasRightIcon?: ImageProps;
-  filterState?: boolean;
+  hasRightIcon?: boolean;
+  isModal?: boolean;
 }
 
 const HeaderBar = ({
@@ -35,7 +31,8 @@ const HeaderBar = ({
   tintColor,
   headerTitle,
   leftIcon,
-  hasRightIcon
+  hasRightIcon,
+  isModal,
 }: HeaderBarProps) => {
 
   const renderHeaderLeft = () => {
@@ -63,7 +60,7 @@ const HeaderBar = ({
           activeOpacity={0.5}
           style={styles.leftIconContainer}
           onPress={onPressLeftIcon}>
-          <Back width={(40)} height={(40)} color={tintColor} />
+          <Back />
         </TouchableOpacity>
       )
     }
@@ -79,11 +76,7 @@ const HeaderBar = ({
             { borderColor: tintColor },
           ]}
           onPress={onPressRightIcon}>
-          <Image
-            source={hasRightIcon}
-            resizeMode="contain"
-            style={styles.leftIcon}
-          />
+          <Close />
         </TouchableOpacity>
       )
     }
@@ -110,7 +103,10 @@ const HeaderBar = ({
   };
 
   return (
-    <View style={[styles.headerContainer, { backgroundColor: backgroundColor || colors.white }]}>
+    <View style={[styles.headerContainer, {
+      backgroundColor: backgroundColor || colors.white,
+      paddingTop: isModal ? hp(0) : paddingTopiOS
+    }]}>
       <View style={[styles.navBar, { backgroundColor: backgroundColor || colors.white }]}>
         {renderHeaderLeft()}
         {renderHeaderTitle()}

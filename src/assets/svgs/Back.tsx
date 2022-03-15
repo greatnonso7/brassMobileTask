@@ -2,14 +2,11 @@ import * as React from "react"
 import Svg, { Rect, Path } from 'react-native-svg';
 
 
-const Back = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) => (
+const Back = () => (
   <Svg
     width={33}
     height={33}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+    fill="none">
     <Rect width={33} height={33} rx={16.5} fill="#E6F5F6" />
     <Path
       fillRule="evenodd"
