@@ -4,34 +4,29 @@ import colors from '../../styles/color';
 import { hp, wp } from '../responsive-dimension';
 import { Feather } from '@expo/vector-icons';
 
-
 interface CustomPickerProps {
-  items?: [],
-  onValueChange?: (selectedValue: string, selectedIndex: number) => void;
   value?: string | number | undefined;
   navigation?: any
 }
 
-const CustomPicker = ({ items, onValueChange, value, navigation }: CustomPickerProps) => {
-  const [showPicker, setShowPicker] = useState<boolean>(false);
+const CustomPicker = ({ value, navigation }: CustomPickerProps) => {
   return (
-    <>
-      <View style={styles.customPickerContainer}>
-        <Text>{value}</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Modal')}
-        // onPress={() => setShowPicker(!showPicker)}
-        >
-          <Feather name="chevron-down" size={hp(30)} color={colors.primary} />
-        </TouchableOpacity>
-      </View>
-      {showPicker && <Text>Hello World</Text>}
-      {/* {showPicker && renderiOSModal()} */}
-    </>
+    <View style={styles.customPickerContainer}>
+      <Text style={[styles.itemValue, { color: value ? colors.dark : colors.lightGrey }]}>
+        {value ? value : 'Select Destination Bank'}
+      </Text>
+      <TouchableOpacity onPress={navigation}>
+        <Feather name="chevron-down" size={hp(30)} color={colors.primary} />
+      </TouchableOpacity>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  itemValue: {
+    fontFamily: 'Recoleta-Regular',
+    fontSize: hp(16),
+  },
   customPickerContainer: {
     height: hp(60),
     width: wp(323),

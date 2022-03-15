@@ -48,7 +48,7 @@ const FormTextInput = forwardRef<RNTextInput, FormTextInputProps>(({
         value={value}
         onFocus={onFocus}
         secureTextEntry={show}
-        placeholderTextColor={colors.dark}
+        placeholderTextColor={colors.lightGrey}
         {...{ ref }}
         {...props}
       />
