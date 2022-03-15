@@ -19,6 +19,7 @@ export type RootStackParamList = {
   SendMoney: undefined;
   NotFound: undefined;
   Transactions: undefined;
+  ConfirmAmount: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

@@ -18,6 +18,7 @@ import TabOneScreen from '../screens/TabOneScreen';
 import Home from '../screens/home';
 import SendMoney from '../screens/send-money';
 import Transactions from '../screens/transactions';
+import ConfirmAmount from '../screens/confirm-amount';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -44,6 +45,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="SendMoney" component={SendMoney} options={{ headerShown: false }} />
       <Stack.Screen name="Transactions" component={Transactions} options={{ headerShown: false }} />
+      <Stack.Screen name="ConfirmAmount" component={ConfirmAmount} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
