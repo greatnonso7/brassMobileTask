@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from '../../styles/color';
 import { hp, wp } from '../responsive-dimension';
 import { Feather } from '@expo/vector-icons';
@@ -11,14 +11,17 @@ interface CustomPickerProps {
 
 const CustomPicker = ({ value, navigation }: CustomPickerProps) => {
   return (
-    <View style={styles.customPickerContainer}>
+    <TouchableOpacity
+      onPress={navigation}
+      activeOpacity={0.6}
+      style={styles.customPickerContainer}>
       <Text style={[styles.itemValue, { color: value ? colors.dark : colors.lightGrey }]}>
         {value ? value : 'Select Destination Bank'}
       </Text>
       <TouchableOpacity onPress={navigation}>
         <Feather name="chevron-down" size={hp(30)} color={colors.primary} />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   )
 }
 
