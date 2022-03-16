@@ -9,9 +9,6 @@ import LongButton from '../../shared/button';
 import { useToast } from 'react-native-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { format, parseISO } from 'date-fns'
-import { sharedImages } from '../../../images';
-import { formatAmount } from '../../utils';
 import { hp } from '../../shared/responsive-dimension';
 import TransactionsItem from '../../shared/transaction-item';
 
@@ -79,7 +76,7 @@ const Home = ({ navigation }: any) => {
       <View style={{ height: hp(400) }}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: hp(100) }}
+          contentContainerStyle={{ paddingBottom: hp(30) }}
           data={transactions?.slice(0, 10)}
           renderItem={({ item }: ListRenderItemInfo<ItemData>) => {
             return (

@@ -12,7 +12,7 @@ export const FinTechServices = {
 	name: 'FinTechServices',
 	state: IsState,
 	reducers,
-	effects: (dispatch) => ({
+	effects: (dispatch: { FinTechServices: { setError: (arg0: boolean) => void; setState: (arg0: { banks?: any; transactions?: any; }) => void; }; }) => ({
 		async fetchBanks(_: any, state: any) {
       dispatch.FinTechServices.setError(false);
 
@@ -28,7 +28,7 @@ export const FinTechServices = {
 			}
     },
     
-    async makeTransfer(data, state) {
+    async makeTransfer(data: any, state: any) {
       dispatch.FinTechServices.setError(false);
 
       try {
@@ -41,22 +41,22 @@ export const FinTechServices = {
       }
     },
 
-    async verifyAccountNumber(data, state) {
+    async verifyAccountNumber(data: any, state: any) {
       dispatch.FinTechServices.setError(false);
 
       try {
         const api = await ApiServices.nameEnquiry(data);
 
         if (api) {
-          return (api?.data)
+          const data = JSON.parse(JSON.stringify(api)).data
+          return data;
         }
-        console.log(api);
       } catch (error) {
         this.handleError(error)
       }
     },
 
-    async fetchTransactions(_, state) {
+    async fetchTransactions(_: any, state: any) {
       dispatch.FinTechServices.setError(false);
 
       try {
@@ -67,18 +67,26 @@ export const FinTechServices = {
             transactions: JSON.parse(JSON.stringify(api)).data,
           })
         }
-        console.log(api);
       } catch (error) {
         this.handleError(error)
       }
     },
 
-    async fetchMoreTransactionsData(data, state) {
+    async fetchMoreTransactionsData(data: any, state: { FinTechServices: { transactions: any; }; }) {
       dispatch.FinTechServices.setError(false);
 
       try {
         const api = await ApiServices.fetchMoreTransactions(data);
-        console.log(api);
+
+        if (api) {
+          const newTransactions = JSON.parse(JSON.stringify(api)).data
+          dispatch.FinTechServices.setState({
+            transactions: [
+              ...state.FinTechServices.transactions,
+              ...newTransactions,
+            ],
+          });
+        }
       } catch (error) {
         this.handleError(error)
       }

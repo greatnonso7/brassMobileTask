@@ -44,12 +44,12 @@ const Transactions = ({ navigation }: any) => {
         data={transactions}
         onEndReachedThreshold={0.01}
         onEndReached={fetchMoreTransactions}
-
         renderItem={({ item }: ListRenderItemInfo<ItemData>) => {
           return (
             <TransactionsItem item={item} />
           )
         }}
+        keyExtractor={(item, index) => item.amount.toString() + index}
       />
     </SafeAreaView>
   )

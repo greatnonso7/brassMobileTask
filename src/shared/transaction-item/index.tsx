@@ -11,7 +11,9 @@ const TransactionsItem = ({ item }: any) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation?.navigate('SingleTransaction', { item })} style={styles.transactionsContainer}>
+    <TouchableOpacity
+      key={item?.created_at + item.amount}
+      onPress={() => navigation?.navigate('SingleTransaction', { item })} style={styles.transactionsContainer}>
       <View style={styles.transactionsHeaderContainer}>
         <Image source={sharedImages.deposit} resizeMode="contain" style={styles.transferIconStatus} />
         <View style={{ marginLeft: 20 }}>
