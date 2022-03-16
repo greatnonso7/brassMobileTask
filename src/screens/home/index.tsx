@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderBar from '../../shared/header-bar';
 import { styles } from './style';
@@ -7,15 +7,19 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import colors from '../../styles/color';
 import LongButton from '../../shared/button';
 import { useToast } from 'react-native-toast-notifications';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const Home = ({ navigation }: any) => {
   const toast = useToast();
 
-  const { FinTechServices: { fetchBanks } } = useDispatch();
+  const { FinTechServices: { fetchBanks, fetchTransactions } } = useDispatch();
+
+  const transactions = useSelector((state: RootState) => state.FinTechServices.transactions);
 
   useEffect(() => {
     fetchBanks();
+    fetchTransactions()
   }, [])
 
   return (
@@ -60,6 +64,18 @@ const Home = ({ navigation }: any) => {
           <Text style={styles.viewTransactionsText}>View All</Text>
         </TouchableOpacity>
       </View>
+
+      <FlatList
+        data={transactions.slice(0, 5)}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.transactionsContainer}>
+              <Text>{item.full_name}</Text>
+            </View>
+          )
+        }}
+
+      />
     </SafeAreaView>
   )
 }

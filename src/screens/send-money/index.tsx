@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import LongButton from '../../shared/button';
 import CustomPicker from '../../shared/custom-picker';
 import HeaderBar from '../../shared/header-bar';

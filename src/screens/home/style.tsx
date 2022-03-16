@@ -73,5 +73,9 @@ export const styles = StyleSheet.create({
     color: colors.primary,
     fontFamily: 'Recoleta-Regular',
     fontSize: hp(14),
+  },
+  transactionsContainer: {
+    marginTop: hp(10),
+    marginHorizontal: wp(20),
   }
 })

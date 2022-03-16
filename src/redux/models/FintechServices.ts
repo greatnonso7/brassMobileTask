@@ -2,7 +2,8 @@ import { reducerActions as reducers } from './reducer';
 import { ApiServices } from '../../services/apis';
 
 const IsState = {
-	banks: [],
+  banks: [],
+  transactions: [],
   token: 'FLWSECK_TEST-SANDBOXDEMOKEY-X',
   // token: 'FLWSECK_TEST-f107670bee2e274404cbeee7657d92ef-X'
 }
@@ -48,6 +49,23 @@ export const FinTechServices = {
 
         if (api) {
           return (api?.data)
+        }
+        console.log(api);
+      } catch (error) {
+        this.handleError(error)
+      }
+    },
+
+    async fetchTransactions(_, state) {
+      dispatch.FinTechServices.setError(false);
+
+      try {
+        const api = await ApiServices.fetchUserTransactions();
+
+        if (api) {
+          dispatch.FinTechServices.setState({
+            transactions: JSON.parse(JSON.stringify(api)).data,
+          })
         }
         console.log(api);
       } catch (error) {
