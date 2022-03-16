@@ -34,7 +34,9 @@ export const FinTechServices = {
       try {
         const api = await ApiServices.sendMoney(data);
 
-        console.log(api);
+        if (api) {
+          return true;
+        }
 
       } catch (error) {
         this.handleError(error)  

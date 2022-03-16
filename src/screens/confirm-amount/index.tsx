@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,8 @@ const ConfirmAmount = ({ navigation, route }: any) => {
 
   const { FinTechServices: { makeTransfer } } = useDispatch();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const initiateTransfer = async () => {
     const data = {
       amount,
@@ -20,8 +22,20 @@ const ConfirmAmount = ({ navigation, route }: any) => {
       account_number: userAccountNumber,
       currency: 'NGN',
     }
+    setLoading(true);
 
-    await makeTransfer(data)
+    const res = await makeTransfer(data);
+
+    if (Boolean(res)) {
+      setLoading(false)
+      toast.show('Transfer queued successfully', { type: 'success', duration: 1500 });
+
+      setTimeout(() => {
+        navigation.push('Home')
+      }, 500)
+    } else {
+      setLoading(false)
+    }
   }
 
 
@@ -60,7 +74,7 @@ const ConfirmAmount = ({ navigation, route }: any) => {
         </View>
       </View>
 
-      <LongButton title="Confirm Transfer" onPress={() => initiateTransfer()} />
+      <LongButton title="Confirm Transfer" loading={loading} onPress={() => initiateTransfer()} />
     </SafeAreaView>
   )
 }

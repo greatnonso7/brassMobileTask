@@ -18,7 +18,7 @@ type SingleTransactionDataType = {
 };
 
 export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  Home: undefined;
   Modal: undefined;
   SendMoney: undefined;
   NotFound: undefined;

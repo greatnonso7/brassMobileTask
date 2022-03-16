@@ -16,7 +16,7 @@ const SendMoney = ({ navigation }: any) => {
   const [bankCode, setBankCode] = useState<string>();
   const [amount, setAmount] = useState<number | null>();
   const [accountName, setAccountName] = useState<string>();
-  const [userAccountNumber, setUserAccountNumber] = useState<string>();
+  const [userAccountNumber, setUserAccountNumber] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const { FinTechServices: { verifyAccountNumber } } = useDispatch();
@@ -38,6 +38,9 @@ const SendMoney = ({ navigation }: any) => {
       const res = await verifyAccountNumber(data);
       if (res) {
         setAccountName(res?.account_name);
+        setLoading(false)
+      } else {
+        setAccountName('');
         setLoading(false)
       }
     } else {
@@ -71,6 +74,12 @@ const SendMoney = ({ navigation }: any) => {
       accountName,
     }
     navigation.navigate('ConfirmAmount', { data })
+
+    setBankName('');
+    setUserAccountNumber('');
+    setBankCode('');
+    setAmount(null);
+    setAccountName('');
   }
 
   return (
