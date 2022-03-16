@@ -21,6 +21,8 @@ export default function ModalScreen({ navigation, route }: any) {
     navigation.goBack();
   };
 
+  console.log(banks);
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar headerTitle='Select Bank' isModal hasRightIcon onPressRightIcon={() => navigation.goBack()} />
@@ -34,13 +36,13 @@ export default function ModalScreen({ navigation, route }: any) {
           renderItem={({ item: { name, code } }) => {
             return (
               <TouchableOpacity
+                key={name + code}
                 onPress={() => goBack(name, code)}
                 style={styles.itemContainer}>
                 <Text style={styles.itemName}>{name}</Text>
               </TouchableOpacity>
             )
           }}
-          keyExtractor={(name) => name}
         />
       </View>
     </SafeAreaView>

@@ -3,7 +3,8 @@ import { ApiServices } from '../../services/apis';
 
 const IsState = {
 	banks: [],
-	token: 'FLWSECK_TEST-SANDBOXDEMOKEY-X',
+  token: 'FLWSECK_TEST-SANDBOXDEMOKEY-X',
+  // token: 'FLWSECK_TEST-f107670bee2e274404cbeee7657d92ef-X'
 }
 
 export const FinTechServices = {
@@ -31,8 +32,24 @@ export const FinTechServices = {
 
       try {
         const api = await ApiServices.sendMoney(data);
+
       } catch (error) {
         this.handleError(error)  
+      }
+    },
+
+    async verifyAccountNumber(data, state) {
+      dispatch.FinTechServices.setError(false);
+
+      try {
+        const api = await ApiServices.nameEnquiry(data);
+
+        if (api) {
+          return (api?.data)
+        }
+        console.log(api);
+      } catch (error) {
+        this.handleError(error)
       }
     },
 		

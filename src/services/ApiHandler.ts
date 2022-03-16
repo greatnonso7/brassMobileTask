@@ -22,13 +22,15 @@ async function handleRequest(req:any) {
   req.headers.language = 'en';
   req.headers.timestamp = new Date().getTime();
   req.timeout = 60000;
+
+  const isBank = uri.includes('/banks');
+
   req.headers.Authorization = `Bearer ${token}`;
 
   console.log({req});
 
   return req;
 }
-
 
 
 async function handleResponse(res: any) {

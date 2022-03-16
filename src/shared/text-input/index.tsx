@@ -6,6 +6,7 @@ import {
   TextInputProps as RNTextInputProps,
   StyleSheet,
   ViewStyle,
+  ActivityIndicator,
 } from 'react-native';
 import colors from '../../styles/color';
 import { hp, wp } from '../responsive-dimension'
@@ -23,6 +24,7 @@ interface FormTextInputProps extends RNTextInputProps {
   showPassword?: () => void;
   calender?: boolean;
   showCalendar?: () => void;
+  isLoading?: boolean;
 }
 
 const FormTextInput = forwardRef<RNTextInput, FormTextInputProps>(({
@@ -33,6 +35,7 @@ const FormTextInput = forwardRef<RNTextInput, FormTextInputProps>(({
   isLocked,
   isPassword,
   show,
+  isLoading,
   calender,
   amount,
   showCalendar,
@@ -52,6 +55,12 @@ const FormTextInput = forwardRef<RNTextInput, FormTextInputProps>(({
         {...{ ref }}
         {...props}
       />
+
+      {isLoading && (
+        <View style={styles.loadingState}>
+          <ActivityIndicator size='small' color={colors.primary} />
+        </View>
+      )}
     </View>
   )
 })
@@ -70,7 +79,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#E6F5F6',
     marginBottom: hp(20),
   },
-
+  loadingState: {
+    position: 'absolute',
+    right: wp(20),
+    top: hp(25),
+  },
   lock: {
     position: 'absolute',
     right: hp(30),
