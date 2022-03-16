@@ -8,7 +8,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, LogBox } from 'react-native';
 import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
 import Home from '../screens/home';
 import SendMoney from '../screens/send-money';
 import Transactions from '../screens/transactions';
@@ -46,7 +45,6 @@ function RootNavigator() {
       <Stack.Screen name="Transactions" component={Transactions} options={{ headerShown: false }} />
       <Stack.Screen name="ConfirmAmount" component={ConfirmAmount} options={{ headerShown: false }} />
       <Stack.Screen name="SingleTransaction" component={SingleTransaction} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} />
       </Stack.Group>
