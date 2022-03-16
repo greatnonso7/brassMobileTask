@@ -64,6 +64,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: hp(20),
   },
   recentTransactionsHeaderText: {
     fontFamily: 'Recoleta-SemiBold',
@@ -76,6 +77,32 @@ export const styles = StyleSheet.create({
   },
   transactionsContainer: {
     marginTop: hp(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: hp(10),
+    paddingBottom: hp(10),
     marginHorizontal: wp(20),
+    borderBottomWidth: hp(0.5),
+  },
+  transactionsHeaderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  fullname: {
+    fontSize: hp(15),
+    fontFamily: 'Recoleta-Regular',
+  },
+  timestamp: {
+    fontSize: hp(14),
+    fontFamily: 'Recoleta-Light',
+  },
+  amount: {
+    fontSize: hp(15),
+    fontFamily: 'Recoleta-Regular',
+  },
+  transferIconStatus: {
+    width: wp(30),
+    height: hp(30)
   }
 })

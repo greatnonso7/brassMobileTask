@@ -105,7 +105,7 @@ const HeaderBar = ({
   return (
     <View style={[styles.headerContainer, {
       backgroundColor: backgroundColor || colors.white,
-      paddingTop: isModal ? hp(0) : paddingTopiOS
+      paddingTop: hp(0)
     }]}>
       <View style={[styles.navBar, { backgroundColor: backgroundColor || colors.white }]}>
         {renderHeaderLeft()}
