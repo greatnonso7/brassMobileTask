@@ -26,7 +26,6 @@ export default function App() {
             duration={1500}
             successColor="green"
             dangerColor="red"
-            // offset={0}
             offsetTop={35}
             warningColor="orange"
             normalColor={colors.primary}

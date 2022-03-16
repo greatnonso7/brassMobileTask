@@ -65,7 +65,7 @@ const SendMoney = ({ navigation }: any) => {
     }
 
     const data = {
-      amount,
+      amount: amount.toString(),
       bankName,
       bankCode,
       userAccountNumber,
@@ -76,10 +76,13 @@ const SendMoney = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBar hasBackButton headerTitle="Funds Transfer" onPressLeftIcon={() => navigation.goBack()} />
+      <HeaderBar
+        hasBackButton
+        headerTitle="Funds Transfer"
+        onPressLeftIcon={() => navigation.goBack()}
+      />
 
       <View style={styles.bodyContainer}>
-
         <View style={styles.amountTextContainer}>
           <CurrencyInput
             onChangeValue={(value: number) => setAmount(value)}
@@ -105,7 +108,6 @@ const SendMoney = ({ navigation }: any) => {
         />
         <FormTextInput editable={false} placeholder="Account Name" value={accountName} />
       </View>
-
       <LongButton title="Continue" onPress={() => verification()} />
     </SafeAreaView>
   )

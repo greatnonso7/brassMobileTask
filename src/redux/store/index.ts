@@ -1,6 +1,6 @@
 import { init, RematchDispatch, RematchRootState } from '@rematch/core'
 import { models, RootModel } from '../models/models';
-import { loadingPlugin } from '../plugins/loading';
+import { loadingPlugin } from '../plugins';
 import { persistPlugin } from '../persist';
  
 export const store = init<RootModel>({

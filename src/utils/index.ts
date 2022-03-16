@@ -25,3 +25,8 @@ export const checkInternetInfo = async (allowBroadcast = false) => {
 };
 
 export const isIOS = Platform.OS === 'ios';
+    
+export const formatAmount = (value: any) => 
+  Number(value)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+\.)/g, '$&,');  
