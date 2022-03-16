@@ -13,6 +13,10 @@ declare global {
   }
 }
 
+type SingleTransactionDataType = {
+  item: Object
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
@@ -20,6 +24,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   Transactions: undefined;
   ConfirmAmount: undefined;
+  SingleTransaction: SingleTransactionDataType;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

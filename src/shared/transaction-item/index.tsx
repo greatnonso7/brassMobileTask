@@ -1,13 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
 import { parseISO, format } from 'date-fns';
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { sharedImages } from '../../../images';
 import { formatAmount } from '../../utils';
 import { hp, wp } from '../responsive-dimension';
 
 const TransactionsItem = ({ item }: any) => {
+
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.transactionsContainer}>
+    <TouchableOpacity onPress={() => navigation?.navigate('SingleTransaction', { item })} style={styles.transactionsContainer}>
       <View style={styles.transactionsHeaderContainer}>
         <Image source={sharedImages.deposit} resizeMode="contain" style={styles.transferIconStatus} />
         <View style={{ marginLeft: 20 }}>
@@ -19,7 +23,7 @@ const TransactionsItem = ({ item }: any) => {
         {item?.currency === 'NGN' ? '₦' : '$'}
         {formatAmount(item.amount)}
       </Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 

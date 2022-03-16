@@ -72,6 +72,17 @@ export const FinTechServices = {
         this.handleError(error)
       }
     },
+
+    async fetchMoreTransactionsData(data, state) {
+      dispatch.FinTechServices.setError(false);
+
+      try {
+        const api = await ApiServices.fetchMoreTransactions(data);
+        console.log(api);
+      } catch (error) {
+        this.handleError(error)
+      }
+    },
 		
 		async handleError(error: any) {
       dispatch.FinTechServices.setError(true);

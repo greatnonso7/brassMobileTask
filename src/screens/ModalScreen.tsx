@@ -21,8 +21,6 @@ export default function ModalScreen({ navigation, route }: any) {
     navigation.goBack();
   };
 
-  console.log(banks);
-
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar headerTitle='Select Bank' isModal hasRightIcon onPressRightIcon={() => navigation.goBack()} />

@@ -13,6 +13,7 @@ import { format, parseISO } from 'date-fns'
 import { sharedImages } from '../../../images';
 import { formatAmount } from '../../utils';
 import { hp } from '../../shared/responsive-dimension';
+import TransactionsItem from '../../shared/transaction-item';
 
 const Home = ({ navigation }: any) => {
   const toast = useToast();
@@ -77,23 +78,12 @@ const Home = ({ navigation }: any) => {
       </View>
       <View style={{ height: hp(400) }}>
         <FlatList
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: hp(100) }}
           data={transactions?.slice(0, 10)}
           renderItem={({ item }: ListRenderItemInfo<ItemData>) => {
             return (
-              <View style={styles.transactionsContainer}>
-                <View style={styles.transactionsHeaderContainer}>
-                  <Image source={sharedImages.deposit} resizeMode="contain" style={styles.transferIconStatus} />
-                  <View style={{ marginLeft: 20 }}>
-                    <Text style={styles.fullname}>{item.full_name === 'N/A' ? 'John Doe' : item.full_name}</Text>
-                    <Text style={styles.timestamp}>{format(parseISO(item?.created_at), 'MMMM d, yyyy')}</Text>
-                  </View>
-                </View>
-                <Text style={styles.amount}>
-                  {item?.currency === 'NGN' ? '₦' : '$'}
-                  {formatAmount(item.amount)}
-                </Text>
-              </View>
+              <TransactionsItem item={item} />
             )
           }}
         />

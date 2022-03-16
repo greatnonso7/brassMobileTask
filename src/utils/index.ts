@@ -30,3 +30,14 @@ export const formatAmount = (value: any) =>
   Number(value)
     .toFixed(2)
     .replace(/\d(?=(\d{3})+\.)/g, '$&,');  
+
+export const getLettersFromName = (fullname: string | null) => {
+  if (fullname === null) {
+    return;
+  } else {
+    const twoLetter = fullname?.split(' ');
+    const result = twoLetter?.map(([v]) => v);
+    const firstNameLetters = result?.join('');
+    return firstNameLetters;
+  }
+};

@@ -22,6 +22,7 @@ import ConfirmAmount from '../screens/confirm-amount';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import SingleTransaction from '../screens/single-transaction';
 
 // LogBox.ignoreLogs([
 //   'Non-serializable values were found in the navigation state',
@@ -51,6 +52,7 @@ function RootNavigator() {
       <Stack.Screen name="SendMoney" component={SendMoney} options={{ headerShown: false }} />
       <Stack.Screen name="Transactions" component={Transactions} options={{ headerShown: false }} />
       <Stack.Screen name="ConfirmAmount" component={ConfirmAmount} options={{ headerShown: false }} />
+      <Stack.Screen name="SingleTransaction" component={SingleTransaction} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} />

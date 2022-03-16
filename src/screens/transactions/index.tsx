@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, ListRenderItemInfo } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderBar from "../../shared/header-bar";
@@ -18,20 +18,33 @@ interface ItemData {
 
 const Transactions = ({ navigation }: any) => {
 
-  const { FinTechServices: { fetchTransactions } } = useDispatch();
+  const [activePage, setActivePage] = useState<number>(1);
+
+  const { FinTechServices: { fetchTransactions, fetchMoreTransactionsData } } = useDispatch();
 
   useEffect(() => {
     fetchTransactions();
   }, []);
 
+  useEffect(() => {
+    fetchMoreTransactionsData(activePage);
+  }, [activePage])
+
   const transactions = useSelector((state: RootState) => state.FinTechServices.transactions);
+
+  const fetchMoreTransactions = async () => {
+    setActivePage(activePage + 1);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar hasBackButton headerTitle="Transactions" onPressLeftIcon={() => navigation.goBack()} />
       <FlatList
         contentContainerStyle={{ paddingBottom: hp(100) }}
-        data={transactions?.slice(0, 10)}
+        data={transactions}
+        onEndReachedThreshold={0.01}
+        onEndReached={fetchMoreTransactions}
+
         renderItem={({ item }: ListRenderItemInfo<ItemData>) => {
           return (
             <TransactionsItem item={item} />
