@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, Image, ListRenderItemInfo } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderBar from '../../shared/header-bar';
 import { styles } from './style';
@@ -9,7 +9,7 @@ import LongButton from '../../shared/button';
 import { useToast } from 'react-native-toast-notifications';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { format, formatDistance, formatRelative, subDays, parseISO } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import { sharedImages } from '../../../images';
 import { formatAmount } from '../../utils';
 import { hp } from '../../shared/responsive-dimension';
@@ -26,7 +26,12 @@ const Home = ({ navigation }: any) => {
     fetchTransactions()
   }, [])
 
-  console.log(transactions);
+  interface ItemData {
+    full_name: string;
+    currency: string;
+    amount: string;
+    created_at: string;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -74,7 +79,7 @@ const Home = ({ navigation }: any) => {
         <FlatList
           contentContainerStyle={{ paddingBottom: hp(100) }}
           data={transactions?.slice(0, 10)}
-          renderItem={({ item }) => {
+          renderItem={({ item }: ListRenderItemInfo<ItemData>) => {
             return (
               <View style={styles.transactionsContainer}>
                 <View style={styles.transactionsHeaderContainer}>
