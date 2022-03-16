@@ -26,7 +26,8 @@ export default function App() {
             duration={1500}
             successColor="green"
             dangerColor="red"
-            offset={0}
+            // offset={0}
+            offsetTop={35}
             warningColor="orange"
             normalColor={colors.primary}
             swipeEnabled={true}
@@ -50,30 +51,28 @@ export default function App() {
           >
             <StatusBar />
             <Navigation colorScheme={colorScheme} />
-            {/* <Toast
-            style={{
-              paddingVertical: hp(16),
-              paddingHorizontal: wp(24),
-              borderRadius: hp(10),
-              flexShrink: 1,
-              marginBottom: 80,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: deviceWidth,
-            }}
-            offset={0}
-            offsetTop={0}
-            offsetBottom={0}
-            textStyle={{
-              color: '#fff',
-              fontFamily: 'Recoleta-Regular',
-              fontSize: 14,
-              alignSelf: 'center',
-            }}
-            placement="bottom"
-            //@ts-ignore
-            ref={ref => (global['toast'] = ref)}
-          /> */}
+            <Toast
+              style={{
+                paddingVertical: hp(16),
+                paddingHorizontal: wp(24),
+                borderRadius: hp(10),
+                flexShrink: 1,
+                marginBottom: 80,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: deviceWidth,
+              }}
+              offsetTop={35}
+              textStyle={{
+                color: '#fff',
+                fontFamily: 'Recoleta-Regular',
+                fontSize: 15,
+                textAlign: 'center',
+              }}
+              placement="top"
+              //@ts-ignore
+              ref={ref => (global['toast'] = ref)}
+            />
           </ToastProvider>
         </SafeAreaProvider>
       </Provider>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import LongButton from '../../shared/button';
@@ -47,6 +47,33 @@ const SendMoney = ({ navigation }: any) => {
     }
   }
 
+  const verification = async () => {
+    if (!amount) {
+      return toast.show('Amount is required', { type: 'danger', duration: 1500 })
+    }
+    if (amount < 100 || amount > 10000000) {
+      return toast.show('Transfer amount should be between 100 and 10,000,00',
+        { type: 'danger', duration: 1500 })
+    }
+
+    if (!bankName) {
+      return toast.show('Destination bank is required', { type: 'danger', duration: 1500 })
+    }
+
+    if (!userAccountNumber) {
+      return toast.show('Destination account number is required', { type: 'danger', duration: 1500 })
+    }
+
+    const data = {
+      amount,
+      bankName,
+      bankCode,
+      userAccountNumber,
+      accountName,
+    }
+    navigation.navigate('ConfirmAmount', { data })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar hasBackButton headerTitle="Funds Transfer" onPressLeftIcon={() => navigation.goBack()} />
@@ -79,7 +106,7 @@ const SendMoney = ({ navigation }: any) => {
         <FormTextInput editable={false} placeholder="Account Name" value={accountName} />
       </View>
 
-      <LongButton title="Continue" onPress={() => navigation.navigate('ConfirmAmount')} />
+      <LongButton title="Continue" onPress={() => verification()} />
     </SafeAreaView>
   )
 }

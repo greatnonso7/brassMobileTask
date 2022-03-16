@@ -14,20 +14,16 @@ const Toast: React.FC<ToastProps> = ({ text, containerStyle, textStyle, bgColor 
     toastStyle: {
       backgroundColor: bgColor,
       paddingVertical: hp(16),
-      height: hp(80),
-      justifyContent: 'center',
-      alignItems: 'center',
       paddingHorizontal: wp(24),
-      // borderRadius: hp(10),
+      borderRadius: hp(10),
       flexShrink: 1,
-      // marginBottom: 80,
-      width: deviceWidth,
+      marginBottom: 80,
+      width: wp(330),
     },
     toastTextStyle: {
       color: '#fff',
       fontFamily: 'Recoleta-Regular',
-      fontSize: 18,
-      paddingTop: hp(25),
+      fontSize: 15,
       textAlign: 'center'
     }
   })
