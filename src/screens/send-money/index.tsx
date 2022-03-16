@@ -17,12 +17,10 @@ const SendMoney = ({ navigation }: any) => {
   const [amount, setAmount] = useState<number | null>();
   const [accountName, setAccountName] = useState<string>();
   const [userAccountNumber, setUserAccountNumber] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { FinTechServices: { verifyAccountNumber } } = useDispatch();
 
-  const nameEnquiryLoading =
-    useSelector((state: RootStateOrAny) =>
-      state.loading?.effects?.FinTechServices?.verifyAccountNumber);
 
   const handle = (data: { bankName: string; bankCode: string }) => {
     if (!data) return;
@@ -31,20 +29,21 @@ const SendMoney = ({ navigation }: any) => {
   };
 
   const setAccountNumber = async (accountNumber: string) => {
-    if (accountNumber.length === 10 && bankName !== '') {
-      console.log('Hello world')
+    if (accountNumber?.length === 10 && bankName !== '') {
       const data = {
         account_number: accountNumber,
         account_bank: bankCode,
       }
+      setLoading(true)
       const res = await verifyAccountNumber(data);
       if (res) {
         setAccountName(res?.account_name);
+        setLoading(false)
       }
-
     } else {
       setUserAccountNumber(accountNumber)
     }
+    setUserAccountNumber(accountNumber)
   }
 
   const verification = async () => {
@@ -103,7 +102,8 @@ const SendMoney = ({ navigation }: any) => {
         <FormTextInput
           placeholder="Enter Account number"
           onChangeText={(text: string) => setAccountNumber(text)}
-          isLoading={nameEnquiryLoading}
+          isLoading={loading}
+          maxLength={10}
           keyboardType="numeric"
         />
         <FormTextInput editable={false} placeholder="Account Name" value={accountName} />

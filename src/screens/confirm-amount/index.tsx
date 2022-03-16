@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import LongButton from '../../shared/button';
 import HeaderBar from '../../shared/header-bar';
 import { formatAmount } from '../../utils';
@@ -8,8 +9,22 @@ import { styles } from './style';
 
 const ConfirmAmount = ({ navigation, route }: any) => {
 
-  const { amount } = route.params?.data;
-  console.log(route.params);
+  const { amount, userAccountNumber, bankName, accountName, bankCode } = route.params?.data;
+
+  const { FinTechServices: { makeTransfer } } = useDispatch();
+
+  const initiateTransfer = async () => {
+    const data = {
+      amount,
+      account_bank: bankCode,
+      account_number: userAccountNumber,
+      currency: 'NGN',
+    }
+
+    await makeTransfer(data)
+  }
+
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar
@@ -20,11 +35,32 @@ const ConfirmAmount = ({ navigation, route }: any) => {
 
       <View style={styles.bodyContainer}>
         <Text style={styles.nairaSign}>₦
-          <Text style={styles.amountValue}>{formatAmount(amount)}</Text>
+          <Text style={styles.amountValue}> {formatAmount(amount)}</Text>
         </Text>
+
+        <View style={styles.transferInfoContainer}>
+          <View style={styles.transferItemInfoContainer}>
+            <Text style={styles.transferItemHeader}>Destination Bank</Text>
+            <Text style={styles.transferItemData}>{bankName}</Text>
+          </View>
+          <View style={styles.transferItemInfoContainer}>
+            <Text style={styles.transferItemHeader}>Account Number</Text>
+            <Text style={styles.transferItemData}>{userAccountNumber}</Text>
+          </View>
+
+          <View style={styles.transferItemInfoContainer}>
+            <Text style={styles.transferItemHeader}>Beneficiary</Text>
+            <Text style={styles.transferItemData}>{accountName}</Text>
+          </View>
+
+          <View style={styles.transferItemInfoContainer}>
+            <Text style={styles.transferItemHeader}>Transfer Amount</Text>
+            <Text style={styles.transferItemData}>₦{formatAmount(amount)}</Text>
+          </View>
+        </View>
       </View>
 
-      <LongButton title="Confirm Transfer" />
+      <LongButton title="Confirm Transfer" onPress={() => initiateTransfer()} />
     </SafeAreaView>
   )
 }

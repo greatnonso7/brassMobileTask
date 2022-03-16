@@ -23,9 +23,9 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
+// LogBox.ignoreLogs([
+//   'Non-serializable values were found in the navigation state',
+// ]);
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
