@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, ListRenderItemInfo } from "react-native";
+import { ActivityIndicator, FlatList, ListRenderItemInfo, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderBar from "../../shared/header-bar";
 import { styles } from "./style";
-import { useDispatch, useSelector } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { hp } from "../../shared/responsive-dimension";
 import TransactionsItem from "../../shared/transaction-item";
 import { RootState } from "../../redux/store";
+import colors from "../../styles/color";
 
 
 interface ItemData {
@@ -22,12 +23,14 @@ const Transactions = ({ navigation }: any) => {
 
   const { FinTechServices: { fetchTransactions, fetchMoreTransactionsData } } = useDispatch();
 
+  const loading = useSelector((state: RootStateOrAny) => state.loading.effects.FinTechServices.fetchMoreTransactionsData);
+
   useEffect(() => {
     fetchTransactions();
   }, []);
 
   useEffect(() => {
-    fetchMoreTransactionsData(activePage);
+    const api = fetchMoreTransactionsData(activePage);
   }, [activePage])
 
   const transactions = useSelector((state: RootState) => state.FinTechServices.transactions);
@@ -35,6 +38,20 @@ const Transactions = ({ navigation }: any) => {
   const fetchMoreTransactions = async () => {
     setActivePage(activePage + 1);
   }
+
+  const renderFooter = () => {
+    return (
+      <View>
+        {loading ? (
+          <ActivityIndicator
+            color={colors.primary}
+            style={{ marginTop: hp(5) }}
+            size="large"
+          />
+        ) : null}
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,6 +67,7 @@ const Transactions = ({ navigation }: any) => {
           )
         }}
         keyExtractor={(item, index) => item.amount.toString() + index}
+        ListFooterComponent={renderFooter}
       />
     </SafeAreaView>
   )

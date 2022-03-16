@@ -88,6 +88,8 @@ export const FinTechServices = {
               ...newTransactions,
             ],
           });
+
+          return true;
         }
       } catch (error) {
         this.handleError(error)
