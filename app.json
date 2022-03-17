@@ -29,6 +29,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "Test App for a react native developer role",
+    "githubUrl": "https://github.com/greatnonso7/brassMobileTask"
   }
 }

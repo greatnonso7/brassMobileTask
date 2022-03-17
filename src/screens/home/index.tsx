@@ -59,7 +59,7 @@ const Home = ({ navigation }: any) => {
         />
 
         <LongButton
-          onPress={() => toast.show('Hello world', { type: 'danger', duration: 3000 })}
+          onPress={() => toast.show('Brass Test', { type: 'success', duration: 3000 })}
           isNotBottom
           buttonStyle={styles.buttonStyle2}
           title="Receive Money"

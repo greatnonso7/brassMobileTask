@@ -20,18 +20,25 @@ interface ItemData {
 const Transactions = ({ navigation }: any) => {
 
   const [activePage, setActivePage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { FinTechServices: { fetchTransactions, fetchMoreTransactionsData } } = useDispatch();
-
-  const loading = useSelector((state: RootStateOrAny) => state.loading.effects.FinTechServices.fetchMoreTransactionsData);
 
   useEffect(() => {
     fetchTransactions();
   }, []);
 
   useEffect(() => {
-    const api = fetchMoreTransactionsData(activePage);
-  }, [activePage])
+    getMoreTransactions();
+  }, [activePage]);
+
+  const getMoreTransactions = async () => {
+    setLoading(true);
+    const api = await fetchMoreTransactionsData(activePage);
+    if (api) {
+      setLoading(false);
+    }
+  }
 
   const transactions = useSelector((state: RootState) => state.FinTechServices.transactions);
 

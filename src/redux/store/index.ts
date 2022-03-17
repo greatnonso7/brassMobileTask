@@ -1,12 +1,11 @@
 import { init, RematchDispatch, RematchRootState } from '@rematch/core'
 import { models, RootModel } from '../models/models';
-import { loadingPlugin } from '../plugins';
 import { persistPlugin } from '../persist';
  
 export const store = init<RootModel>({
 	models,
 	//@ts-ignore
-	plugins: [persistPlugin, loadingPlugin],
+	plugins: [persistPlugin],
 })
 
 export type Store = typeof store
