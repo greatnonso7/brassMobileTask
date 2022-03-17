@@ -60,7 +60,7 @@ const SingleTransaction = ({ navigation, route }: any) => {
           </View>
 
           <View style={styles.transactionsItemContainer}>
-            <Text style={styles.headerTitle}>Transaction Reference</Text>
+            <Text style={styles.headerTitle}>Reference</Text>
             <Text style={styles.bodyText}>{reference}</Text>
           </View>
 
