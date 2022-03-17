@@ -92,18 +92,17 @@ export const FinTechServices = {
           return true;
         }
       } catch (error) {
-        this.handleError(error)
+        this.handleError(error);
       }
     },
 		
 		async handleError(error: any) {
       dispatch.FinTechServices.setError(true);
 
-      if (error?.status === 401) {
+      if (error?.includes('undefined')) {
         console.log(error);
-        return;
       }
-
+      
       if (error || error?.data?.errors || error?.data?.status === 'error') {
         var message =
           error?.message ||

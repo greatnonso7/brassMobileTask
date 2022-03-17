@@ -57,5 +57,6 @@ export const styles = StyleSheet.create({
   bodyText: {
     fontSize: hp(15),
     fontFamily: 'Recoleta-SemiBold',
+    maxWidth: wp(200)
   }
 })
